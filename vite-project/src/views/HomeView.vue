@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>Popular Movies</h1>
-    <h3>Contains data from 2019 to 2024</h3>
+    <h1>Lord of the Rings</h1>
     <ul>
-      <li v-for="(movie, index) in movies" :key="index">
-        <p><strong>Title:</strong> {{ movie.title }} ({{ movie.year }})</p>
-        <p><strong>Overview:</strong> {{ movie.overview }}</p>
-        <img :src="movie.poster" alt="Movie poster" width="150"/>
+      <li v-for="(book, index) in books" :key="index">
+        <p><strong>Title:</strong> {{ book.title }} ({{ book.publish_year ? book.publish_year[0] : 'Unknown Year' }})</p>
+        <p><strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}</p>
+        <p><strong>Overview:</strong> {{ book.first_sentence ? book.first_sentence[0] : 'No overview available' }}</p>
+        
+        <img :src="'https://covers.openlibrary.org/b/id/' + book.cover_i + '-M.jpg'" alt="Book Cover" width="150"/>
       </li>
     </ul>
   </div>
@@ -15,30 +16,23 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-const movies = ref([]);
+const books = ref([]);
 
-// Fetch movie data from the Trakt API
+
 async function getData() {
   try {
-    let res = await fetch("https://api.trakt.tv/movies/popular", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "trakt-api-key": "YOUR_TRAKT_API_KEY", // Replace with your actual API key
-      },
-    });
-
+    let res = await fetch("https://openlibrary.org/search.json?q=the+lord+of+the+rings");
+    
     if (!res.ok) throw new Error("Failed to fetch data");
     let data = await res.json();
-    // Assuming the response contains a list of movies, assign it to movies
-    movies.value = data;
+    
+    books.value = data.docs;
   } catch (error) {
     console.error(error);
     alert("Failed to fetch data");
   }
 }
 
-// Fetch movie data when the component is mounted
 onMounted(() => {
   getData();
 });
