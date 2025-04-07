@@ -3,9 +3,9 @@
     <h1>Lord of the Rings</h1>
     <ul>
       <li v-for="(book, index) in books" :key="index">
-        <p><strong>Title:</strong> {{ book.title }} ({{ book.publish_year ? book.publish_year[0] : 'Unknown Year' }})</p>
+        <p><strong>Title:</strong> {{ book.title }} </p>
         <p><strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}</p>
-        <p><strong>Overview:</strong> {{ book.first_sentence ? book.first_sentence[0] : 'No overview available' }}</p>
+        <p><strong>Year of Release:</strong> {{ book.first_publish_year ? book.first_publish_year[0] : 'No overview available' }}</p>
         
         <img :src="'https://covers.openlibrary.org/b/id/' + book.cover_i + '-M.jpg'" alt="Book Cover" width="150"/>
       </li>
