@@ -1,62 +1,85 @@
 <template>
-  <div>
-    <li v-if="book">
-      <p><strong>Title:</strong> {{ book.title }}</p>
-      <p>
-        <strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}
-      </p>
-      <p>
-        <strong>Year of Release:</strong> {{ book.first_publish_year || 'No overview available' }}
-      </p>
-
-      <img
-        v-if="book.cover_i"
-        :src="'https://covers.openlibrary.org/b/id/' + book.cover_i + '-M.jpg'"
-        alt="Book Cover"
-        width="150"
-      />
-      <p v-else>No cover available</p>
+  <div class="book-item-container">
+    <li v-if="book" class="book-item">
+      <div class="book-image">
+        <img
+          v-if="book.cover_i"
+          :src="'https://covers.openlibrary.org/b/id/' + book.cover_i + '-M.jpg'"
+          alt="Book Cover"
+          class="book-cover"
+        />
+        <p v-else>No cover available</p>
+      </div>
+      <div class="book-details">
+        <p><strong>Title:</strong> {{ book.title }}</p>
+        <p><strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}</p>
+        <p><strong>Year of Release:</strong> {{ book.first_publish_year || 'No overview available' }}</p>
+      </div>
     </li>
   </div>
 </template>
 
-<script setup>
-defineProps({
-  book: {
-    type: Object,
-  },
-})
+<script>
+export default {
+  name: 'BookItem',
+  props: {
+    book: {
+      type: Object,
+      required: true
+    }
+  }
+};
 </script>
 
 <style scoped>
-ul {
+.book-item-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px;
+  gap: 20px;
+}
+
+.book-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  padding: 15px;
   list-style-type: none;
-  padding: 0;
+  flex-shrink: 0;  /* Prevents items from shrinking */
 }
 
-li {
-  border: 1px solid #ddd;
-  margin: 10px 0;
-  padding: 10px;
+.book-image {
+  margin-bottom: 15px;
 }
 
-p {
+.book-cover {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.book-details p {
+  font-size: 14px;
+  color: #333;
   margin: 5px 0;
-  color: rgb(168, 0, 22);
-  font-size: 18px;
 }
 
-h1 {
-  color: rgb(133, 0, 11);
-  font-size: 36px;
+.book-details strong {
+  font-weight: bold;
 }
 
-h3 {
-  color: rgb(133, 0, 11);
+@media (max-width: 768px) {
+  .book-item {
+    width: 150px;
+  }
 }
 
-img {
-  width: 100px;
-  height: auto;
+@media (max-width: 480px) {
+  .book-item {
+    width: 120px;
+  }
 }
 </style>
