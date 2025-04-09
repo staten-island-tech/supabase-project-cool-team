@@ -16,6 +16,7 @@
         width="150"
       />
       <p v-else>No cover available</p>
+      <button @click="addToWatchlist(book)">Add to Watchlist</button>
     </li>
   </div>
 </template>
@@ -26,6 +27,13 @@ defineProps({
     type: Object,
   },
 })
+
+const watchlist = ref([]);
+
+const addToWatchlist = (book) => {
+  watchlist.value.push(book);
+  console.log('Book added to watchlist:', book.title);
+};
 </script>
 
 <style scoped>
