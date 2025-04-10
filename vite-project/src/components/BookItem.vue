@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ul>
     <li v-if="book">
       <p><strong>Title:</strong> {{ book.title }}</p>
       <p>
@@ -16,8 +17,10 @@
         width="150"
       />
       <p v-else>No cover available</p>
-      <button @click="addToWatchlist(book)">Add to Watchlist</button>
+      <button @click="addToWatchlist(book)" class="mt-2 px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800"
+      >Add to Watchlist</button>
     </li>
+  </ul>
   </div>
 </template>
 
@@ -28,12 +31,6 @@ defineProps({
   },
 })
 
-const watchlist = ref([]);
-
-const addToWatchlist = (book) => {
-  watchlist.value.push(book);
-  console.log('Book added to watchlist:', book.title);
-};
 </script>
 
 <style scoped>
