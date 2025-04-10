@@ -47,7 +47,7 @@ export default {
   text-align: center;
   padding: 15px;
   list-style-type: none;
-  flex-shrink: 0;  /* Prevents items from shrinking */
+  flex-shrink: 0; 
 }
 
 .book-image {
