@@ -43,9 +43,7 @@
 
 <script setup>
 defineProps({
-  book: {
-    type: Object,
-  },
+  book: Object
 })
 
 </script>
