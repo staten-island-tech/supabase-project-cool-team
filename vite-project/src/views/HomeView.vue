@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Lord of the Rings</h1>
-    <BookItem v-for="(book, index) in books" :key="index" :book="book" />
+    <h1 class="px-100">Lord of the Rings</h1>
+    <input v-model="searchQuery" @keyup.enter="getData" placeholder="Search books..." />
+    <ul><BookItem v-for="(book, index) in books" :key="index" :book="book" :add-to-watchlist="addToWatchlist" /></ul>
   </div>
 </template>
 
@@ -10,14 +11,16 @@ import { ref, onMounted } from 'vue'
 import BookItem from '../components/BookItem.vue'
 
 const books = ref([])
+const watchlist = ref([])
+const searchQuery = ref('') 
 
 async function getData() {
   try {
     let res = await fetch('https://openlibrary.org/search.json?q=the+lord+of+the+rings')
-
+    
     if (!res.ok) throw new Error('Failed to fetch data')
     let data = await res.json()
-
+    
     books.value = data.docs
   } catch (error) {
     console.error(error)
@@ -28,6 +31,14 @@ async function getData() {
 onMounted(() => {
   getData()
 })
+
+const addToWatchlist = (book) => {
+  if (!watchlist.value.includes(book)) {
+    watchlist.value.push(book)
+    console.log('Added to watchlist:', book.title)
+  }
+}
+
 </script>
 
 <style scoped></style>
