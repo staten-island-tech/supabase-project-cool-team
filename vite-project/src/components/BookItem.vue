@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul>
-    <li v-if="book">
+    <ul class="list-none p-0">
+    <li v-if="book" class="border border-gray-300 my-2.5 p-2.5">
       <p><strong>Title:</strong> {{ book.title }}</p>
       <p>
         <strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}
@@ -19,6 +19,7 @@
       <p v-else>No cover available</p>
       <button @click="addToWatchlist(book)" class="mt-2 px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800"
       >Add to Watchlist</button>
+      <button type="submit">Search</button>
     </li>
   </ul>
   </div>
@@ -34,34 +35,4 @@ defineProps({
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  border: 1px solid #ddd;
-  margin: 10px 0;
-  padding: 10px;
-}
-
-p {
-  margin: 5px 0;
-  color: rgb(168, 0, 22);
-  font-size: 18px;
-}
-
-h1 {
-  color: rgb(133, 0, 11);
-  font-size: 36px;
-}
-
-h3 {
-  color: rgb(133, 0, 11);
-}
-
-img {
-  width: 100px;
-  height: auto;
-}
 </style>
