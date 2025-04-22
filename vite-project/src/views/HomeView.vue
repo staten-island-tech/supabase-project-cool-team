@@ -18,7 +18,6 @@ import { ref, onMounted } from 'vue'
 import BookItem from '../components/BookItem.vue'
 
 const books = ref([])
-const watchlist = ref([])
 const searchQuery = ref('')
 
 async function getData() {
