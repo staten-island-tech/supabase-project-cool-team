@@ -22,7 +22,7 @@
           @click="addToWatchlist(book)"
           class="mt-2 px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800"
         >
-          Add to Watchlist
+          Add to Reading list
         </button>
       </li>
     </ul>
