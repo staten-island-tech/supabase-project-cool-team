@@ -32,6 +32,7 @@
 <script setup>
 defineProps({
   book: Object,
+  addToWatchlist: Function,
 })
 </script>
 
