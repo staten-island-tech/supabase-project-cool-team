@@ -1,56 +1,39 @@
 <template>
-  <div class="book-card">
-    <img
-      v-if="book.cover_i"
-      :src="`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`"
-      alt="Book Cover"
-      class="book-image"
-    />
-    <p v-else class="no-cover">No cover available</p>
+  <div>
+    <ul class="list-none p-0">
+      <li v-if="book" class="border border-gray-300 my-2.5 p-2.5 flex flex-col items-center">
+        <p class="text-center"><strong>Title:</strong> {{ book.title }}</p>
+        <p class="text-center">
+          <strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}
+        </p>
+        <p class="text-center">
+          <strong>Year of Release:</strong> {{ book.first_publish_year || 'No overview available' }}
+        </p>
 
-    <div class="book-info">
-      <p><strong>Title:</strong> {{ book.title }}</p>
-      <p><strong>Author:</strong> {{ book.author_name?.[0] || 'Unknown' }}</p>
-      <p><strong>Year:</strong> {{ book.first_publish_year || 'N/A' }}</p>
-    </div>
+        <img
+          v-if="book.cover_i"
+          :src="'https://covers.openlibrary.org/b/id/' + book.cover_i + '-M.jpg'"
+          alt="Book Cover"
+          class="mx-auto mb-2 w-32 h-auto rounded-lg"
+        />
+        <p v-else class="text-center text-gray-500">No cover available</p>
+
+        <button
+          @click="addToWatchlist(book)"
+          class="mt-2 px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800"
+        >
+          Add to Watchlist
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
 defineProps({
-  book: Object
+  book: Object,
+  addToWatchlist: Function,
 })
 </script>
 
-<style scoped>
-.book-card {
-  width: 180px;
-  flex-shrink: 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #fff;
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.book-image {
-  width: 100px;
-  height: auto;
-  margin-bottom: 8px;
-}
-
-.no-cover {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.book-info p {
-  margin: 2px 0;
-  text-align: center;
-}
-</style>
+<style scoped></style>
