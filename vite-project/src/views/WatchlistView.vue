@@ -13,3 +13,4 @@
   }
 }
 </style>
+postgresql://postgres:[coolteampassword08]@db.chygiwhfjrhxfesjwbkp.supabase.co:5432/postgres
