@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="list-none p-0">
-      <li v-if="book" class="border border-gray-300 my-2.5 p-2.5 flex flex-col items-center">
+      <li v-if="book" class="bg-white shadow-md rounded-xl border border-gray-200 p-4 flex flex-col items-center space-y-2">
         <p class="text-center"><strong>Title:</strong> {{ book.title }}</p>
         <p class="text-center">
           <strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}
