@@ -15,7 +15,7 @@ const router = createRouter({
     {
       path: '/watchlist',
       name: 'watchlist',
-      component: () => import('../views/WatchlistView.vue'),
+      component: () => import('../views/ReadListView.vue'),
       meta: { isLoggedIn: true }, // This route requires authentication
     },
   ],
