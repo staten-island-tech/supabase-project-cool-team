@@ -4,7 +4,7 @@
       <li v-if="book" class="bg-white shadow-md rounded-xl border border-gray-200 p-4 flex flex-col items-center space-y-2">
         <p class="text-center"><strong>Title:</strong> {{ book.title }}</p>
         <p class="text-center">
-          <strong>Author:</strong> {{ book.author_name ? book.author_name[0] : 'Unknown Author' }}
+          <strong>Author:</strong> {{ getAuthorName(book) }}
         </p>
         <p class="text-center">
           <strong>Year of Release:</strong> {{ book.first_publish_year || 'No overview available' }}
@@ -34,6 +34,13 @@ defineProps({
   book: Object,
   addToWatchlist: Function,
 })
+
+function getAuthorName(book) {
+  if (!book || !book.author_name || book.author_name.length === 0) {
+    return 'Unknown Author';
+  }
+  return book.author_name[0];
+}
 </script>
 
 <style scoped></style>
