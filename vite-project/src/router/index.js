@@ -12,9 +12,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/watchlist',
-      name: 'watchlist',
-      component: () => import('../views/WatchlistView.vue'),
+      path: '/Readlist',
+      name: 'readlist',
+      component: () => import('../views/ReadListView.vue'),
       meta: { isLoggedIn: true },
     },
   ],
