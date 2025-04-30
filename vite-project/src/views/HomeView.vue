@@ -35,6 +35,12 @@ onMounted(() => {
   getData()
 })
 
+const addToWatchlist = (book) => {
+  if (!watchlist.value.includes(book)) {
+    watchlist.value.push(book)
+    console.log('Added to watchlist:', book.title)
+  }
+}
 
 </script>
 
