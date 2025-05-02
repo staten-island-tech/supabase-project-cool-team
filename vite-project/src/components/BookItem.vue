@@ -43,4 +43,5 @@ function getAuthorName(book) {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

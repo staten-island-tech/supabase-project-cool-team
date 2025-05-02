@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1 class="px-100">Lord of the Rings</h1>
+  <h1 class="px-100">Books</h1>
   <form @submit.prevent="getData">
     <input v-model="searchQuery" placeholder="Search books..." />
     <button type="submit">Search</button>

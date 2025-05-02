@@ -16,26 +16,24 @@ const router = createRouter({
       path: '/watchlist',
       name: 'watchlist',
       component: () => import('../views/ReadListView.vue'),
-      meta: { isLoggedIn: true }, // This route requires authentication
+      meta: { isLoggedIn: true }, 
     },
   ],
 })
-// On successful login:
 
-// Global navigation guard
+
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
-  // Check if the route requires authentication
   if (to.meta.requiresAuth) {
-    // If not logged in, redirect to home or login page
+    
     if (!authStore.isLoggedIn) {
-      next({ name: 'home' }) // Redirect to home or login page
+      next({ name: 'home' }) 
     } else {
-      next() // Allow navigation to the watchlist
+      next() 
     }
   } else {
-    next() // If the route doesn't require auth, allow navigation
+    next() 
   }
 })
 

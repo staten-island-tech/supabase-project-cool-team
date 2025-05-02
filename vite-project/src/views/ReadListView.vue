@@ -1,13 +1,13 @@
 <template>
-  <!-- <div>
+ <div>
     <h1 class="text-center">Reading List</h1>
     <ul>
-      <li v-for="book in watchlist" :key="book.key">
+      <li v-for="book in readlist" :key="book.key">
         <p><strong>Title:</strong> {{ book.title }}</p>
         <p><strong>Author:</strong> {{ book.author_name?.[0] || 'Unknown Author' }}</p>
       </li>
     </ul>
-  </div> -->
+  </div> 
 </template>
 
 <script setup>
