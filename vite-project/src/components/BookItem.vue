@@ -44,18 +44,6 @@ function getAuthorName(book) {
 </script>
 
 <style scoped>
-li {
-  width: 200px;
-  min-height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: lightblue;
-  font-size: 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 </style>

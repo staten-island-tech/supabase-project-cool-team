@@ -45,20 +45,6 @@ const addToWatchlist = (book) => {
 </script>
 
 <style scoped>
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-  justify-content: flex-start;
-}
 
-@media (max-width: 768px) {
-  ul {
-    justify-content: center;
-  }
-}
 </style>
 
