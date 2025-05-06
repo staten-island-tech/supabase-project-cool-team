@@ -44,4 +44,6 @@ const addToWatchlist = (book) => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
