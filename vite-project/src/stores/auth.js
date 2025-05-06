@@ -1,4 +1,4 @@
-{/* <script setup>
+{ <script setup>
 import { useAuthStore } from '../stores/authStore'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -13,4 +13,4 @@ onMounted (()=> {
         next()
     })
 })
-</script> */}
+</script> }

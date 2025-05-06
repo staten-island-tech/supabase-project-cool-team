@@ -18,8 +18,8 @@ async function signUp(email, password) {
     }
   }
 
-  async function login(email, password) {
-  const { user, session, error } = await supabase.auth.signInWithPassword({
+async function login(email, password) {
+  const { user, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
   });
