@@ -1,18 +1,12 @@
 <template>
-  <div>
-    <ul class="list-none p-0">
-      <li
-        v-if="book"
-        class="bg-white shadow-md rounded-xl border border-gray-200 p-4 flex flex-col items-center space-y-2"
-      >
-        <p class="text-center"><strong>Title:</strong> {{ book.title }}</p>
-        <p class="text-center"><strong>Author:</strong> {{ getAuthorName(book) }}</p>
-        <p class="text-center">
-          <strong>Year of Release:</strong>
-          {{ book.first_publish_year || 'No overview available' }}
-        </p>
-
-
+  <div v-if="book"
+  class="bg-white shadow-md rounded-xl border border-gray-200 p-4 flex flex-col items-center space-y-2">
+    <p class="text-center"><strong>Title:</strong> {{ book.title }}</p>
+    <p class="text-center"><strong>Author:</strong> {{ getAuthorName(book) }}</p>
+    <p class="text-center">
+      <strong>Year of Release:</strong>
+      {{ book.first_publish_year || 'No overview available' }}
+    </p>
     <img
       v-if="book.cover_i"
       :src="`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`"
@@ -27,8 +21,6 @@
         >
           Add to Readlist
         </button>
-      </li>
-    </ul>
   </div>
 </template>
 
