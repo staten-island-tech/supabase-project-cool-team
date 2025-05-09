@@ -15,7 +15,7 @@ const router = createRouter({
       path: '/Readlist',
       name: 'readlist',
       component: () => import('../views/ReadListView.vue'),
-      meta: { isLoggedIn: true },
+      meta: { isLoggedIn: true }, 
     },
   ],
 })
@@ -24,9 +24,9 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth) {
-
+    
     if (!authStore.isLoggedIn) {
-      next({ name: 'home' })
+      next({ name: 'home' }) 
     } else {
       next() 
     }
