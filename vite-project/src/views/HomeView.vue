@@ -3,7 +3,7 @@
   <h1 class="px-100">Books</h1>
   <form @submit.prevent="getData">
     <input v-model="searchQuery" placeholder="Search books..." />
-    <button type="submit">Search</button>
+    <button type="submit">SEARCH</button>
   </form>
     <div><BookItem v-for="(book, index) in books" :key="index" :book="book" :add-to-watchlist="addToWatchlist" /></div>
   </div>
