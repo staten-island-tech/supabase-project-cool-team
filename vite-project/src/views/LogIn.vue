@@ -10,22 +10,25 @@
         <label for="password">Password:</label>
         <input type="password" v-model="password" id="password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit">SUBMIT</button>
     </form>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/authStore'
 
 const authStore = useAuthStore()
 const router = useRouter()
+
 const email = ref('')
 const password = ref('')
 
 const handleLogin = async () => {
   try {
-    await authStore.logIn(email.value, password.value)
+    authStore.logIn()
     alert('Login successful!')
     router.push('/')
   } catch (error) {
