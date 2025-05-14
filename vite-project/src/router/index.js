@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import { useAuthStore } from '../stores/authStore'
 
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,14 +12,13 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/watchlist',
-      name: 'watchlist',
+      path: '/Readlist',
+      name: 'readlist',
       component: () => import('../views/ReadListView.vue'),
       meta: { isLoggedIn: true }, 
     },
   ],
 })
-
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
