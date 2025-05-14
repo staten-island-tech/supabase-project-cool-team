@@ -17,14 +17,11 @@
 
 <script setup>
 import { ref } from 'vue'
-import { supabase } from '@supabase/supabase-js'
-import { useAuthStore } from '../stores/authStore'
 
 const authStore = useAuthStore()
 const router = useRouter()
 const email = ref('')
 const password = ref('')
-
 
 const handleLogin = async () => {
   try {
