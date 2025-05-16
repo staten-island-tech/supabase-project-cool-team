@@ -51,4 +51,3 @@ function handleAddToReadlist(book) {
   readlistStore.addToReadlist(book)
 }
 </script>
- 
