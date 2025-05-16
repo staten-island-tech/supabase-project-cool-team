@@ -1,16 +1,18 @@
 <template>
   <div>
-    <h2>Login</h2>
+    <h1 class="text-4xl font-bold text-center mb-4 mt-4" >Login</h1>
     <form @submit.prevent="handleLogin">
-      <div>
+      <div class="text-center text-2xl">
         <label for="email">Email:</label>
         <input type="email" v-model="email" id="email" required />
       </div>
-      <div>
+      <div class="text-center text-2xl">
         <label for="password">Password:</label>
         <input type="password" v-model="password" id="password" required />
       </div>
-      <button type="submit">SUBMIT</button>
+      <div class="flex justify-center" >
+        <button type="submit" class="border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-200">SUBMIT</button>
+      </div>
     </form>
   </div>
 </template>
@@ -30,7 +32,7 @@ const handleLogin = async () => {
   try {
     authStore.logIn()
     alert('Login successful!')
-    router.push('/')
+    router.push('/home')
   } catch (error) {
     alert('Login failed: ' + error.message)
   }
