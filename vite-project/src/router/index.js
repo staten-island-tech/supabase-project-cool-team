@@ -8,11 +8,6 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: LogIn,
-    },
-    {
-      path: '/home',
       name: 'home',
       component: HomeView,
     },
@@ -21,6 +16,11 @@ const router = createRouter({
       name: 'readlist',
       component: () => import('../views/ReadListView.vue'),
       meta: { requiresAuth: true },
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LogIn,
     },
   ],
 })
