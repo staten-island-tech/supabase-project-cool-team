@@ -8,14 +8,19 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      redirect: '/login' // default route should be login
+    },
+    {
+      path: '/home',
       name: 'home',
       component: HomeView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/Readlist',
       name: 'readlist',
       component: () => import('../views/ReadListView.vue'),
-      meta: { requiresAuth : true },
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',
@@ -24,19 +29,15 @@ const router = createRouter({
     },
   ],
 })
-
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
-  if (to.meta.requiresAuth) {
-    if (!authStore.isLoggedIn) {
-      next({ name: 'home' })
-    } else {
-      next()
-    }
+  if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+    next({ name: 'login' })  // Correct redirect
   } else {
     next()
   }
 })
+
 
 export default router
