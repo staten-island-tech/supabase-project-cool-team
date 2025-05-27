@@ -36,10 +36,6 @@ const handleLogin = async () => {
   } catch (error) {
     alert('Login failed: ' + error.message)
   }
- 
+
 }
-<<<<<<< HEAD
 </script>
-=======
- </script>
->>>>>>> main

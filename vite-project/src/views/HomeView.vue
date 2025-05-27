@@ -7,8 +7,8 @@
     </form>
     <div>
       <BookItem
-        v-for="(book, index) in books"
-        :key="index"
+        v-for="book in books"
+        :key="book.key || book.cover_edition_key || book.title"
         :book="book"
         :add-to-watchlist="addToWatchlist"
       />
@@ -22,25 +22,21 @@ import BookItem from '../components/BookItem.vue'
 
 const books = ref([])
 const watchlist = ref([])
-const searchQuery = ref('') // Two-way bound to input
+const searchQuery = ref('')
 
 async function getData() {
   try {
-    const query = searchQuery.value || 'fiction' // Default query
-    const res = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`)
+    const query = searchQuery.value
+    const res = await fetch(`https://openlibrary.org/search.json?q=${query}`)
 
     if (!res.ok) throw new Error('Failed to fetch data')
+
     const data = await res.json()
     books.value = data.docs
   } catch (error) {
-    console.error(error)
-    alert('Failed to fetch data')
+    console.error('Error fetching books:', error)
   }
 }
-
-onMounted(() => {
-  getData()
-})
 
 const addToWatchlist = (book) => {
   if (!watchlist.value.some((b) => b.key === book.key)) {
@@ -48,18 +44,11 @@ const addToWatchlist = (book) => {
     console.log('Added to watchlist:', book.title)
   }
 }
+
+onMounted(() => {
+  getData()
+})
 </script>
 
 <style scoped>
-form {
-  margin: 1rem 0;
-}
-input {
-  padding: 0.5rem;
-  width: 250px;
-}
-button {
-  padding: 0.5rem 1rem;
-  margin-left: 0.5rem;
-}
 </style>

@@ -1,4 +1,3 @@
-
 <template>
   <div v-if="book"
   class="bg-white shadow-md rounded-xl border border-gray-200 p-4 flex flex-col items-center space-y-2">
