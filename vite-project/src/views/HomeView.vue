@@ -22,11 +22,11 @@ import BookItem from '../components/BookItem.vue'
 
 const books = ref([])
 const watchlist = ref([])
-const searchQuery = ref('') // Two-way bound to input
+const searchQuery = ref('')
 
 async function getData() {
   try {
-    const query = searchQuery.value || 'fiction' // Default query
+    const query = searchQuery.value || 'fiction' 
     const res = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`)
 
     if (!res.ok) throw new Error('Failed to fetch data')
