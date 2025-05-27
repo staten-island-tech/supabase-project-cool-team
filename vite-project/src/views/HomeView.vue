@@ -15,15 +15,13 @@ import BookItem from '../components/BookItem.vue'
 
 const books = ref([])
 const watchlist = ref([])
-const searchQuery = ref('') 
+const searchQuery = ref('harry potter') // <-- default search
 
 async function getData() {
   try {
-    let res = await fetch('https://openlibrary.org/search.json?q=${query}')
-    
+    let res = await fetch(`https://openlibrary.org/search.json?q=${searchQuery.value}`)
     if (!res.ok) throw new Error('Failed to fetch data')
     let data = await res.json()
-    
     books.value = data.docs
   } catch (error) {
     console.error(error)
@@ -34,6 +32,7 @@ async function getData() {
 onMounted(() => {
   getData()
 })
+
 
 const addToWatchlist = (book) => {
   if (!watchlist.value.includes(book)) {
