@@ -28,22 +28,13 @@ const router = useRouter()
 const email = ref('')
 const password = ref('')
 
-const handleLogin = async (email, password) => {
+const handleLogin = async () => {
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (error) {
-      alert('Login failed: ' + error.message)
-      return
-    }
-
-    authStore.logIn(data.user)
-
+    authStore.logIn()
     alert('Login successful!')
     router.push('/home')
   } catch (error) {
-    alert('Please Log In or Sign Up! Unexpected error')
+    alert('Login failed: ' + error.message)
   }
 }
-
 </script>
