@@ -26,17 +26,25 @@ const searchQuery = ref('')
 
 async function getData() {
   try {
-    const query = searchQuery.value || 'fiction' 
+    const query = searchQuery.value.trim() || 'fiction'
     const res = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`)
 
     if (!res.ok) throw new Error('Failed to fetch data')
     const data = await res.json()
-    books.value = data.docs
+
+    // Try to filter by title relevance
+    const filtered = data.docs.filter(book =>
+      book.title?.toLowerCase().includes(query.toLowerCase())
+    )
+
+    // If nothing matched, show the raw results (fallback)
+    books.value = filtered.length > 0 ? filtered : data.docs
   } catch (error) {
     console.error(error)
     alert('Failed to fetch data')
   }
 }
+
 
 onMounted(() => {
   getData()
