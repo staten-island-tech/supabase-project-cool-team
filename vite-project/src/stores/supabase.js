@@ -18,18 +18,3 @@ async function signUp(email, password) {
   }
 }
 
-async function login(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password,
-  });
-  if (error) {
-    console.error('Login failed:', error.message)
-    alert('Invalid email or password')
-    return false
-  }
-
-  console.log('User logged in successfully:', data.user)
-  return true
-}
-
