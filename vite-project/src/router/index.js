@@ -29,15 +29,19 @@ const router = createRouter({
     },
   ],
 })
+
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
-  if (to.meta.requiresAuth && !authStore.isLoggedIn) {
-    next({ name: 'login' })  // Correct redirect
+  if (to.meta.requiresAuth) {
+    if (!authStore.isLoggedIn) {
+      next({ name: 'home' })
+    } else {
+      next()
+    }
   } else {
     next()
   }
 })
-
 
 export default router

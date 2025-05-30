@@ -42,7 +42,7 @@ async function getData() {
 
     await nextTick()
 
-    // Animate book items after DOM updates
+  
     gsap.from(bookItems.value, {
       y: 20,
       opacity: 0,
