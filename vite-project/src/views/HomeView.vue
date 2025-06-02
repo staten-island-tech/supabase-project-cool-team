@@ -20,9 +20,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick, watch } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import BookItem from '../components/BookItem.vue'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const books = ref([])
 const watchlist = ref([])
@@ -42,7 +45,7 @@ async function getData() {
 
     await nextTick()
 
-  
+    // Animate book items with trailing fade in on page load
     gsap.from(bookItems.value, {
       y: 20,
       opacity: 0,
@@ -50,6 +53,24 @@ async function getData() {
       stagger: 0.1,
       ease: 'power1.out',
     })
+
+    bookItems.value.forEach((item, i) => {
+      gsap.fromTo(item, 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 80%', 
+            toggleActions: 'play none none reverse',
+          },
+          delay: i * 0.1
+        }
+      )
+    })
+
   } catch (error) {
     console.error(error)
     alert('Failed to fetch data')
@@ -58,6 +79,19 @@ async function getData() {
 
 onMounted(async () => {
   await getData()
+
+
+  gsap.to(heading.value, {
+    y: () => window.innerHeight * 0.2, 
+    ease: 'none',
+    scrollTrigger: {
+      trigger: heading.value,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    },
+  })
+
 
   gsap.from(heading.value, {
     y: -50,
@@ -73,6 +107,7 @@ const addToWatchlist = (book) => {
     console.log('Added to watchlist:', book.title)
   }
 }
+
 </script>
 
 <style scoped>
