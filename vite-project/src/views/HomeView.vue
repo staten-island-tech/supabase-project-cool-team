@@ -42,7 +42,6 @@ async function getData() {
   }
 }
 
-
 onMounted(() => {
   getData()
 })
