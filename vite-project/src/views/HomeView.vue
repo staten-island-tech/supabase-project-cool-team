@@ -7,8 +7,8 @@
     </form>
     <div>
       <BookItem
-        v-for="(book, index) in books"
-        :key="index"
+        v-for="book in books"
+        :key="book.key"
         :book="book"
         :add-to-watchlist="addToWatchlist"
       />
@@ -21,7 +21,6 @@ import { ref, onMounted } from 'vue'
 import BookItem from '../components/BookItem.vue'
 
 const books = ref([])
-const watchlist = ref([])
 const searchQuery = ref('')
 
 async function getData() {
@@ -47,10 +46,8 @@ onMounted(() => {
 })
 
 const addToWatchlist = (book) => {
-  if (!watchlist.value.some((b) => b.key === book.key)) {
-    watchlist.value.push(book)
-    console.log('Added to watchlist:', book.title)
-  }
+  readlistStore.addToReadlist(book)
+  console.log('Added to watchlist:', book.title)
 }
 </script>
 
