@@ -6,17 +6,17 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 async function signUp(email, password) {
-  const { user, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
-  });
+    const { user, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
   
-  if (error) {
-    console.error('Error during sign-up:', error.message);
-  } else {
-    console.log('User signed up successfully:', user);
+    if (error) {
+      console.error('Error during sign-up:', error.message);
+    } else {
+      console.log('User signed up successfully:', user);
+    }
   }
-}
 
 export async function signOut() {
   const { error } = await supabase.auth.signOut();
@@ -27,4 +27,3 @@ export async function signOut() {
     console.log('User signed out successfully');
   }
 }
-
