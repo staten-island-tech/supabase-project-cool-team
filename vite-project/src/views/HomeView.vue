@@ -24,7 +24,7 @@ async function getData() {
 
     if (!res.ok) throw new Error('Failed to fetch data')
     const data = await res.json()
-    books.value = data.docs
+    books.value = data.docs.slice(0, 20) 
   } catch (error) {
     console.error(error)
     alert('Failed to fetch data')

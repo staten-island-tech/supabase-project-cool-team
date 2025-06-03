@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-center text-2xl mb-4">Read List</h1>
-    <button @click="handleSignOut" type="submit" class="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-200">Sign Out</button>
+    <button @click="signOut" type="submit" class="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-200">Sign Out</button>
     <div class="space-y-4">
       <div
         v-for="book in readlist"
