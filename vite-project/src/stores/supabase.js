@@ -6,30 +6,27 @@ const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 async function signUp(email, password) {
-  const { user, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
-  });
+    const { user, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
   
-  if (error) {
-    console.error('Error during sign-up:', error.message);
-  } else {
-    console.log('User signed up successfully:', user);
+    if (error) {
+      console.error('Error during sign-up:', error.message);
+    } else {
+      console.log('User signed up successfully:', user);
+    }
   }
-}
 
 async function login(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { user, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
   });
+
   if (error) {
-    console.error('Login failed:', error.message)
-    alert('Invalid email or password')
-    return false
+    console.error('Error during login:', error.message);
+  } else {
+    console.log('User logged in successfully:', user);
   }
-
-  console.log('User logged in successfully:', data.user)
-  return true
 }
-
