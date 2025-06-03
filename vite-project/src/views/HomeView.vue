@@ -1,51 +1,60 @@
 <template>
   <div>
-    <h1 ref="heading" class="px-100">Books</h1>
-
+    <h1 class="px-100">Books</h1>
     <form @submit.prevent="getData">
       <input v-model="searchQuery" placeholder="Search books..." />
       <button type="submit">Search</button>
     </form>
-
     <div>
-      <div
+      <BookItem
         v-for="(book, index) in books"
         :key="index"
-        :ref="el => bookItems[index] = el"
-      >
-        <BookItem :book="book" :add-to-watchlist="addToWatchlist" />
-      </div>
+        :book="book"
+        :add-to-watchlist="addToWatchlist"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { ref, onMounted, nextTick, watch } from 'vue'
 import BookItem from '../components/BookItem.vue'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+=======
+import { ref, onMounted } from 'vue'
+import BookItem from '../components/BookItem.vue'
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+import { ref, onMounted } from 'vue'
+import BookItem from '../components/BookItem.vue'
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+import { ref, onMounted } from 'vue'
+import BookItem from '../components/BookItem.vue'
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
 
 const books = ref([])
 const watchlist = ref([])
 const searchQuery = ref('')
 
-const heading = ref(null)
-const bookItems = ref([])
-
 async function getData() {
   try {
-    const query = searchQuery.value || 'fiction'
+    const query = searchQuery.value.trim() || 'fiction'
     const res = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`)
 
     if (!res.ok) throw new Error('Failed to fetch data')
     const data = await res.json()
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     books.value = data.docs
 
     await nextTick()
 
-    // Animate book items with trailing fade in on page load
+  
     gsap.from(bookItems.value, {
       y: 20,
       opacity: 0,
@@ -53,45 +62,34 @@ async function getData() {
       stagger: 0.1,
       ease: 'power1.out',
     })
+=======
+=======
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
 
-    bookItems.value.forEach((item, i) => {
-      gsap.fromTo(item, 
-        { y: 30, opacity: 0 }, 
-        { 
-          y: 0, 
-          opacity: 1, 
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 80%', 
-            toggleActions: 'play none none reverse',
-          },
-          delay: i * 0.1
-        }
-      )
-    })
-
+    const filtered = data.docs.filter(book =>
+      book.title?.toLowerCase().includes(query.toLowerCase())
+    )
+    books.value = filtered.length > 0 ? filtered : data.docs
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
   } catch (error) {
     console.error(error)
     alert('Failed to fetch data')
   }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 onMounted(async () => {
   await getData()
-
-
-  gsap.to(heading.value, {
-    y: () => window.innerHeight * 0.2, 
-    ease: 'none',
-    scrollTrigger: {
-      trigger: heading.value,
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true,
-    },
-  })
-
 
   gsap.from(heading.value, {
     y: -50,
@@ -99,6 +97,18 @@ onMounted(async () => {
     duration: 1,
     ease: 'power2.out',
   })
+=======
+onMounted(() => {
+  getData()
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+onMounted(() => {
+  getData()
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+=======
+onMounted(() => {
+  getData()
+>>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
 })
 
 const addToWatchlist = (book) => {
@@ -107,7 +117,6 @@ const addToWatchlist = (book) => {
     console.log('Added to watchlist:', book.title)
   }
 }
-
 </script>
 
 <style scoped>
