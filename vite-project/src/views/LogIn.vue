@@ -36,6 +36,6 @@ const handleLogin = async () => {
   } catch (error) {
     alert('Login failed: ' + error.message)
   }
-
+ 
 }
-</script>
+ </script>
