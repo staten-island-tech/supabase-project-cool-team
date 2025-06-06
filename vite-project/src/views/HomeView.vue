@@ -17,24 +17,9 @@
 </template>
 
 <script setup>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { ref, onMounted, nextTick, watch } from 'vue'
-import BookItem from '../components/BookItem.vue'
-import { gsap } from 'gsap'
-=======
 import { ref, onMounted } from 'vue'
 import BookItem from '../components/BookItem.vue'
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
-import { ref, onMounted } from 'vue'
-import BookItem from '../components/BookItem.vue'
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
-import { ref, onMounted } from 'vue'
-import BookItem from '../components/BookItem.vue'
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+// import { gsap } from 'gsap'  // Commented out since related variables are missing
 
 const books = ref([])
 const watchlist = ref([])
@@ -47,68 +32,37 @@ async function getData() {
 
     if (!res.ok) throw new Error('Failed to fetch data')
     const data = await res.json()
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    books.value = data.docs
-
-    await nextTick()
-
-  
-    gsap.from(bookItems.value, {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: 'power1.out',
-    })
-=======
-=======
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
 
     const filtered = data.docs.filter(book =>
       book.title?.toLowerCase().includes(query.toLowerCase())
     )
     books.value = filtered.length > 0 ? filtered : data.docs
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+
+    // GSAP animation removed due to missing refs
+    // await nextTick()
+    // gsap.from(bookItems.value, {
+    //   y: 20,
+    //   opacity: 0,
+    //   duration: 0.6,
+    //   stagger: 0.1,
+    //   ease: 'power1.out',
+    // })
   } catch (error) {
     console.error(error)
     alert('Failed to fetch data')
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-onMounted(async () => {
-  await getData()
+onMounted(() => {
+  getData()
 
-  gsap.from(heading.value, {
-    y: -50,
-    opacity: 0,
-    duration: 1,
-    ease: 'power2.out',
-  })
-=======
-onMounted(() => {
-  getData()
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
-onMounted(() => {
-  getData()
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
-=======
-onMounted(() => {
-  getData()
->>>>>>> 6ceeb2f3efa473657745628b309bc031d1e9015d
+  // GSAP animation removed due to missing refs
+  // gsap.from(heading.value, {
+  //   y: -50,
+  //   opacity: 0,
+  //   duration: 1,
+  //   ease: 'power2.out',
+  // })
 })
 
 const addToWatchlist = (book) => {
