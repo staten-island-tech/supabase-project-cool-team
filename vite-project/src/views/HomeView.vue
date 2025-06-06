@@ -45,7 +45,6 @@ async function getData() {
 
     await nextTick()
 
-    // Animate book items with trailing fade in on page load
     gsap.from(bookItems.value, {
       y: 20,
       opacity: 0,
