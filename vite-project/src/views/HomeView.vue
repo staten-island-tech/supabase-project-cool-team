@@ -46,8 +46,10 @@ onMounted(() => {
 })
 
 const addToWatchlist = (book) => {
-  readlistStore.addToReadlist(book)
-  console.log('Added to watchlist:', book.title)
+  if (!watchlist.value.some((b) => b.key === book.key)) {
+    watchlist.value.push(book)
+    console.log('Added to watchlist:', book.title)
+  }
 }
 </script>
 

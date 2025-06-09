@@ -17,7 +17,7 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/Readlist',
+      path: '/readlist',
       name: 'readlist',
       component: () => import('../views/ReadListView.vue'),
       meta: { requiresAuth: true },
