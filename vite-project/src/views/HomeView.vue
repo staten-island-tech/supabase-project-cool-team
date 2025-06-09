@@ -7,15 +7,17 @@
       <button type="submit">Search</button>
     </form>
 
-    <div>
-      <div
-        v-for="(book, index) in books"
-        :key="index"
-        :ref="el => bookItems[index] = el"
-      >
-        <BookItem :book="book" :add-to-watchlist="addToWatchlist" />
-      </div>
-    </div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <div
+    v-for="(book, index) in books"
+    :key="index"
+    :ref="el => bookItems[index] = el"
+  >
+    <BookItem :book="book" :add-to-watchlist="addToWatchlist" />
+  </div>
+</div>
+
   </div>
 </template>
 
