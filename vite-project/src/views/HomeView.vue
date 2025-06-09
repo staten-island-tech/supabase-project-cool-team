@@ -33,10 +33,32 @@ async function getData() {
     if (!res.ok) throw new Error('Failed to fetch data')
     const data = await res.json()
 
-    const filtered = data.docs.filter(book =>
-      book.title?.toLowerCase().includes(query.toLowerCase())
-    )
-    books.value = filtered.length > 0 ? filtered : data.docs
+    await nextTick()
+
+    gsap.from(bookItems.value, {
+      y: 20,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: 'power1.out',
+    })
+
+    bookItems.value.forEach((item, i) => {
+      gsap.fromTo(item, 
+        { y: 30, opacity: 0 }, 
+        { 
+          y: 0, 
+          opacity: 1, 
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 80%', 
+            toggleActions: 'play none none reverse',
+          },
+          delay: i * 0.1
+        }
+      )
+    })
 
     // GSAP animation removed due to missing refs
     // await nextTick()
