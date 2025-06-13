@@ -7,17 +7,11 @@
       <button type="submit">Search</button>
     </form>
 
-
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  <div
-    v-for="(book, index) in books"
-    :key="index"
-    :ref="el => bookItems[index] = el"
-  >
-    <BookItem :book="book" :add-to-watchlist="addToWatchlist" />
-  </div>
-</div>
-
+    <div>
+      <div v-for="(book, index) in books" :key="index" :ref="(el) => (bookItems[index] = el)">
+        <BookItem :book="book" :add-to-watchlist="addToWatchlist" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,7 +24,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const books = ref([])
-const watchlist = ref([])
 const searchQuery = ref('')
 
 const heading = ref(null)
@@ -56,22 +49,22 @@ async function getData() {
     })
 
     bookItems.value.forEach((item, i) => {
-      gsap.fromTo(item, 
-        { y: 30, opacity: 0 }, 
-        { 
-          y: 0, 
-          opacity: 1, 
+      gsap.fromTo(
+        item,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: item,
-            start: 'top 80%', 
+            start: 'top 80%',
             toggleActions: 'play none none reverse',
           },
-          delay: i * 0.1
-        }
+          delay: i * 0.1,
+        },
       )
     })
-
   } catch (error) {
     console.error(error)
     alert('Failed to fetch data')
@@ -81,9 +74,8 @@ async function getData() {
 onMounted(async () => {
   await getData()
 
-
   gsap.to(heading.value, {
-    y: () => window.innerHeight * 0.2, 
+    y: () => window.innerHeight * 0.2,
     ease: 'none',
     scrollTrigger: {
       trigger: heading.value,
@@ -92,7 +84,6 @@ onMounted(async () => {
       scrub: true,
     },
   })
-
 
   gsap.from(heading.value, {
     y: -50,
@@ -108,7 +99,6 @@ const addToWatchlist = (book) => {
     console.log('Added to watchlist:', book.title)
   }
 }
-
 </script>
 
 <style scoped>

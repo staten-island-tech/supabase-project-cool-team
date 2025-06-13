@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-4xl font-bold text-center mb-4 mt-4" >Login</h1>
+    <h1 class="text-4xl font-bold text-center mb-4 mt-4">Login</h1>
     <form @submit.prevent="handleLogin">
       <div class="text-center text-2xl">
         <label for="email">Email:</label>
@@ -10,8 +10,13 @@
         <label for="password">Password:</label>
         <input type="password" v-model="password" id="password" required />
       </div>
-      <div class="flex justify-center" >
-        <button type="submit" class="border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-200">SUBMIT</button>
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
+        >
+          SUBMIT
+        </button>
       </div>
     </form>
   </div>
@@ -21,6 +26,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/authStore'
+import { supabase } from '../stores/supabase'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -36,6 +42,5 @@ const handleLogin = async () => {
   } catch (error) {
     alert('Login failed: ' + error.message)
   }
- 
 }
- </script>
+</script>
