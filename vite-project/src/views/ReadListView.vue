@@ -1,9 +1,8 @@
 <template>
   <div>
     <h1 class="text-center text-2xl mb-4">Read List</h1>
-    <button @click="signOut" type="submit" class="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white font-semibold py-2 px-6 rounded-lg transition duration-200">Sign Out</button>
-    <div class="space-y-4">
-      <div
+    <ul class="space-y-4">
+      <li
         v-for="book in readlist"
         :key="book.key"
         class="bg-white shadow rounded p-4 flex flex-col items-center space-y-2"
@@ -22,18 +21,13 @@
           class="w-32 h-auto rounded-lg"
         />
         <p v-else class="text-gray-500">No cover available</p>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
-
-
 <script setup>
-import { useReadlistStore } from '../stores/readlistStore';
-import { signOut } from '../stores/supabase.js';
+import { useReadlistStore } from '../stores/readlistStore'
 
 const { readlist } = useReadlistStore()
-
-await signOut();
 </script>

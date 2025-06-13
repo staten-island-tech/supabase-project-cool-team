@@ -1,15 +1,32 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from './stores/authStore'
+import { supabase } from './stores/supabase'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+async function handleSignOut() {
+  const { error } = await supabase.auth.signOut()
+  if (error) {
+    alert('Error signing out: ' + error.message)
+    return
+  }
+  authStore.logOut()
+  router.push('/login')
+}
 </script>
 
 <template>
   <header>
     <nav>
-     <RouterLink to="/login">Login</RouterLink>
-     <RouterLink to="/home">Home</RouterLink>
-     <RouterLink to="/readlist">Reading List</RouterLink>
+      <RouterLink to="/login">Login</RouterLink>
+      <RouterLink to="/home">Home</RouterLink>
+      <RouterLink to="/readlist">Reading List</RouterLink>
+      <RouterLink to="/signup">Sign Up</RouterLink>
+      <button @click="handleSignOut">Sign Out</button>
     </nav>
-
   </header>
   <RouterView />
 </template>
