@@ -25,22 +25,33 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/authStore'
 import { supabase } from '../stores/supabase'
+import { useAuthStore } from '@/stores/authStore'
 
-const authStore = useAuthStore()
 const router = useRouter()
+const authStore = useAuthStore()
 
 const email = ref('')
 const password = ref('')
 
 const handleLogin = async () => {
   try {
-    authStore.logIn()
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    })
+
+    if (error) throw error
+
+    // Mark user as logged in in your store
+    await authStore.logIn()
+
     alert('Login successful!')
-    router.push('/home')
+    await router.push('/home')
   } catch (error) {
     alert('Login failed: ' + error.message)
   }
 }
+
 </script>
+

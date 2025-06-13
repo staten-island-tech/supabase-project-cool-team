@@ -20,6 +20,8 @@
     <button
       ref="addBtn"
       @click="handleAddToReadlist(book)"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
       class="mt-2 px-4 py-2 bg-red-700 text-white rounded"
     >
       Add to Readlist
@@ -28,45 +30,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import gsap from 'gsap'
-import { useReadlistStore } from '../stores/readlistStore'
+import { useReadingListStore } from '../stores/readlistStore'
 
 const props = defineProps({
   book: Object,
 })
 
-const readlistStore = useReadlistStore()
+const readlistStore = useReadingListStore()
 const addBtn = ref(null)
 
 function getAuthorName(book) {
-  if (!book || !book.author_name || book.author_name.length === 0) {
+  if (!book || !book.author_name?.length) {
     return 'Unknown Author'
   }
   return book.author_name[0]
 }
 
 function handleAddToReadlist(book) {
-  readlistStore.addToReadlist(book)
+  readlistStore.addItem(book.title, getAuthorName(book))
 }
 
-onMounted(() => {
-  const btn = addBtn.value
-
-  btn.addEventListener('mouseenter', () => {
-    gsap.to(btn, {
-      boxShadow: '0 0 20px rgba(255, 0, 0, 0.8)',
-      duration: 0.3,
-      ease: 'power2.out',
-    })
+function handleMouseEnter() {
+  if (!addBtn.value) return
+  gsap.to(addBtn.value, {
+    boxShadow: '0 0 20px rgba(255, 0, 0, 0.8)',
+    duration: 0.3,
+    ease: 'power2.out',
   })
+}
 
-  btn.addEventListener('mouseleave', () => {
-    gsap.to(btn, {
-      boxShadow: 'none',
-      duration: 0.3,
-      ease: 'power2.out',
-    })
+function handleMouseLeave() {
+  if (!addBtn.value) return
+  gsap.to(addBtn.value, {
+    boxShadow: 'none',
+    duration: 0.3,
+    ease: 'power2.out',
   })
-})
+}
 </script>

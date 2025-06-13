@@ -21,12 +21,16 @@ async function handleSignOut() {
 <template>
   <header>
     <nav>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/home">Home</RouterLink>
-      <RouterLink to="/readlist">Reading List</RouterLink>
-      <RouterLink to="/signup">Sign Up</RouterLink>
-      <button @click="handleSignOut">Sign Out</button>
-    </nav>
+  <RouterLink to="/home">Home</RouterLink>
+  <RouterLink to="/readlist">Reading List</RouterLink>
+  
+  <template v-if="!authStore.isLoggedIn">
+    <RouterLink to="/login">Login</RouterLink>
+    <RouterLink to="/signup">Sign Up</RouterLink>
+  </template>
+
+  <button v-if="authStore.isLoggedIn" @click="handleSignOut">Sign Out</button>
+</nav>
   </header>
   <RouterView />
 </template>

@@ -62,7 +62,7 @@ const handleSignUp = async () => {
     if (error) {
       errorMessage.value = error.message
     } else {
-      alert('Sign up successful! Please check your email to confirm your account.')
+      alert('Sign up successful!')
       router.push('/login')
     }
   } catch (error) {
